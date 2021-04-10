@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_demo_app_code/weatherPage.dart';
+import 'package:weather_demo_app_code/weatherDetailsPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        body: WeatherPage(),
+        body: WeatherDetailsPage(),
       ),
     );
   }
