@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_demo_app_code/weatherDetailsPage.dart';
 
 class WeatherSearchDetails extends StatefulWidget {
+  static const String id = '/weatherSearchDetails';
+
   @override
   _WeatherSearchDetailsState createState() => _WeatherSearchDetailsState();
 }
@@ -20,7 +23,7 @@ class _WeatherSearchDetailsState extends State<WeatherSearchDetails> {
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              vertical: 15,
+              vertical: 30,
               horizontal: 10,
             ),
             child: Column(
@@ -31,7 +34,12 @@ class _WeatherSearchDetailsState extends State<WeatherSearchDetails> {
                       Icons.location_on,
                       color: Colors.white,
                     ),
-                    border: OutlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.white,
                       ),
@@ -46,8 +54,29 @@ class _WeatherSearchDetailsState extends State<WeatherSearchDetails> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
+                FlatButton(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 150,
+                  ),
+                  color: Colors.blue,
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      WeatherDetailsPage.id,
+                    );
+                  },
+                  child: Text(
+                    'Search',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
               ],
             ),
           ),
