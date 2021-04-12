@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:weather_demo_app_code/networkHelper.dart';
 import 'package:weather_demo_app_code/weatherDetailsPage.dart';
 
@@ -40,9 +41,26 @@ class _WeatherSearchPageState extends State<WeatherSearchPage> {
                 TextField(
                   controller: myController,
                   decoration: InputDecoration(
-                    suffixIcon: Icon(
-                      Icons.location_on,
-                      color: Colors.white,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        Icons.location_on,
+                        color: Colors.white,
+                      ),
+                      onPressed: () async {
+                        await Geolocator.requestPermission();
+                        var position = await Geolocator.getCurrentPosition();
+                        NetworkHelper()
+                            .getCurrentWeatherByPosition(
+                                position.latitude, position.longitude, 'metric')
+                            .then((value) => {
+                                  Navigator.pushNamed(
+                                    context,
+                                    WeatherDetailsPage.id,
+                                    arguments: value,
+                                  )
+                                });
+                        var x = '';
+                      },
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -76,8 +94,8 @@ class _WeatherSearchPageState extends State<WeatherSearchPage> {
                   ),
                   onPressed: () async {
                     var networkHelper = NetworkHelper();
-                    var weatherData = await networkHelper.getCurrentWeather(
-                        myController.text, 'metric');
+                    var weatherData = await networkHelper
+                        .getCurrentWeatherByCity(myController.text, 'metric');
                     Navigator.pushNamed(
                       context,
                       WeatherDetailsPage.id,
