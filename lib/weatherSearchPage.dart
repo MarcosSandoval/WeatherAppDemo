@@ -11,6 +11,14 @@ class WeatherSearchPage extends StatefulWidget {
 }
 
 class _WeatherSearchPageState extends State<WeatherSearchPage> {
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    myController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +38,7 @@ class _WeatherSearchPageState extends State<WeatherSearchPage> {
             child: Column(
               children: [
                 TextField(
+                  controller: myController,
                   decoration: InputDecoration(
                     suffixIcon: Icon(
                       Icons.location_on,
@@ -68,7 +77,7 @@ class _WeatherSearchPageState extends State<WeatherSearchPage> {
                   onPressed: () async {
                     var networkHelper = NetworkHelper();
                     var weatherData = await networkHelper.getCurrentWeather(
-                        'New York', 'metric');
+                        myController.text, 'metric');
                     Navigator.pushNamed(
                       context,
                       WeatherDetailsPage.id,
