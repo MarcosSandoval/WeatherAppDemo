@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_demo_app_code/model/weatherData.dart';
 
 class WeatherDetailsPage extends StatefulWidget {
   static const String id = '/weatherDetailsPage';
@@ -20,6 +21,8 @@ class _WeatherDetailsPageState extends State<WeatherDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    WeatherData weatherData = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -46,7 +49,7 @@ class _WeatherDetailsPageState extends State<WeatherDetailsPage> {
                   child: Column(
                     children: [
                       Text(
-                        'New York',
+                        weatherData.name,
                         style: TextStyle(
                           fontSize: 40,
                           color: Colors.white,
@@ -66,7 +69,7 @@ class _WeatherDetailsPageState extends State<WeatherDetailsPage> {
                           Column(
                             children: [
                               Text(
-                                '14°$selectedCurrency',
+                                '${weatherData.temperature}°$selectedCurrency',
                                 style: TextStyle(
                                   fontSize: 70,
                                   color: Colors.white,
@@ -81,7 +84,7 @@ class _WeatherDetailsPageState extends State<WeatherDetailsPage> {
                         height: 10,
                       ),
                       Text(
-                        '12° / 16° Feels like 12°',
+                        '${weatherData.minTemperature}° / ${weatherData.maxTemperature}° Feels like ${weatherData.feelTemperature}°',
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.white,
@@ -91,7 +94,7 @@ class _WeatherDetailsPageState extends State<WeatherDetailsPage> {
                         height: 20,
                       ),
                       Text(
-                        'Clear',
+                        '${weatherData.main}',
                         style: TextStyle(
                           fontSize: 40,
                           color: Colors.white,
@@ -99,7 +102,7 @@ class _WeatherDetailsPageState extends State<WeatherDetailsPage> {
                         ),
                       ),
                       Text(
-                        'clear sky',
+                        '${weatherData.description}',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.white,

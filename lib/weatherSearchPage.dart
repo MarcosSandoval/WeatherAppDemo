@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_demo_app_code/networkHelper.dart';
 import 'package:weather_demo_app_code/weatherDetailsPage.dart';
 
-class WeatherSearchDetails extends StatefulWidget {
+class WeatherSearchPage extends StatefulWidget {
   static const String id = '/weatherSearchDetails';
 
   @override
-  _WeatherSearchDetailsState createState() => _WeatherSearchDetailsState();
+  _WeatherSearchPageState createState() => _WeatherSearchPageState();
 }
 
-class _WeatherSearchDetailsState extends State<WeatherSearchDetails> {
+class _WeatherSearchPageState extends State<WeatherSearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,16 +57,22 @@ class _WeatherSearchDetailsState extends State<WeatherSearchDetails> {
                 SizedBox(
                   height: 50,
                 ),
-                FlatButton(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 150,
+                TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal: 150,
+                    ),
                   ),
-                  color: Colors.blue,
-                  onPressed: () {
+                  onPressed: () async {
+                    var networkHelper = NetworkHelper();
+                    var weatherData = await networkHelper.getCurrentWeather(
+                        'New York', 'metric');
                     Navigator.pushNamed(
                       context,
                       WeatherDetailsPage.id,
+                      arguments: weatherData,
                     );
                   },
                   child: Text(

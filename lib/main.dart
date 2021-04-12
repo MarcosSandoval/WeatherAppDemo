@@ -29,9 +29,9 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: WeatherSearchDetails.id,
+      initialRoute: WeatherSearchPage.id,
       routes: {
-        WeatherSearchDetails.id: (context) => WeatherSearchDetails(),
+        WeatherSearchPage.id: (context) => WeatherSearchPage(),
         WeatherDetailsPage.id: (context) => WeatherDetailsPage(),
       },
     );
